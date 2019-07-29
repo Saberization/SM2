@@ -14,6 +14,7 @@
 <body>
     <h1>SM2</h1>
     <div class="toolbar">
+        <input type="text" value="hello world" placeholder="请输入当前要加密的文本" id="encode-text" />
         <button onclick="generateCipher()">生成 20 条密文</button>
         <button onclick="clearCipher()">清空密文</button>
     </div>
@@ -22,14 +23,15 @@
     </ul>
 
     <script>
-        var msg = 'hello world';
         var pubkeyHex =
             "0452712EBA7FE2C9615F6DE59C6EF697F085BD52B25952597DD35014BB8F201987F8D818EFAE710DBEC08FE2E4C7E3E0113EEBAB4B0E8B044E1A3CC8B149D76BE7";
         var keyCollection = [];
         var $cipherItems = $('#cipher-items');
+        var $msg = $('#encode-text');
         
         function generateCipher() {
             var item = '';
+            var msg = $msg.val();
 
             for (var i = 0, len = 20; i < len; i++) {
                 var encryptData = sm2Encrypt(msg, pubkeyHex, 0);
